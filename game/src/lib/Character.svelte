@@ -5,18 +5,16 @@ Command: npx @threlte/gltf@2.0.3 ./src/lib/Character.glb
 
 <script>
   import { Group } from 'three'
-  import { T, forwardEventHandlers } from '@threlte/core'
+  import { T } from '@threlte/core'
   import { useGltf, useGltfAnimations } from '@threlte/extras'
 
   export const ref = new Group()
 
   const gltf = useGltf('/src/lib/Character.glb')
   export const { actions, mixer } = useGltfAnimations(gltf, ref)
-
-  const component = forwardEventHandlers()
 </script>
 
-<T is={ref} dispose={false} {...$$restProps} bind:this={$component}>
+<T is={ref} {...$$restProps}>
   {#await gltf}
     <slot name="fallback" />
   {:then gltf}
